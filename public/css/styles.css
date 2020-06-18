@@ -22,6 +22,7 @@ body {
 
 h1 {
     margin-bottom: 16px;
+    text-align:center
 }
 
 label {
@@ -81,6 +82,16 @@ button:disabled {
 .centered-form input {
     margin-bottom: 16px;
     width: 100%;
+}
+
+.centered-form select {
+    margin-bottom: 16px;
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid #eeeeee;
+    padding: 12px;
+    outline: none;
+    color: #777;
 }
 
 /* Chat Page Layout */
@@ -181,3 +192,4 @@ button:disabled {
     font-weight: 300;
     padding: 12px 24px 0 24px;
 }
+

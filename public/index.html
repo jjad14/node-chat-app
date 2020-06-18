@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Chat App</title>
+        <title>Join | ChatApp</title>
         <link rel="icon" href="/img/favicon.png">
         <link rel="stylesheet" href="/css/styles.min.css">
     </head>
     <body>
+
        <div class="centered-form">
            <div class="centered-form__box">
                 <h1>Welcome</h1>
                 <form action="/chat.html">
                     <label for="">Display name</label>
-                    <input type="text" name="username" placeholder="Display name" required>
+                    <input type="text" name="username" placeholder="Display name" autofocus required autocomplete="off">
+                    
                     <label>Room</label>
-                    <input type="text" name="room" placeholder="Room" required>
+                    <input type="text" id="room-name" name="room" placeholder="Room" required autocomplete="off">
+                    
+                    <label>Active Rooms</label>
+                    <select id="activeRoom" name="activeRoom" onchange="myFunction(event)">
+                        <option disabled selected>List of active rooms</option>
+                    </select>
                     <button>Join</button>
                 </form>
            </div>
        </div>
+
+       <script src="/socket.io/socket.io.js"></script>
+       <script src="/js/index.js"></script>
     </body>
 </html>

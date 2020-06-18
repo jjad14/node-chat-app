@@ -1,4 +1,5 @@
 const users = []
+const rooms = []
 
 const addUser = ({id, username, room}) => {
     // Clean the data
@@ -27,6 +28,15 @@ const addUser = ({id, username, room}) => {
     // Store user
     const user = { id, username, room}
     users.push(user)
+
+    const existingRoom = rooms.find((_room) => {
+        return _room === room
+    })
+
+    if (!existingRoom) {
+        rooms.push(room)
+    }
+
     return {user}
 }
 
@@ -48,9 +58,23 @@ const getUsersInRoom = (room) => {
     return users.filter((user) => user.room === room)
 }
 
+const getRoomList = () => {
+    return rooms
+}
+
+const removeRoom = (room) => {
+    const index = rooms.findIndex((_room) => room === _room)
+
+    if (index !== -1) {
+        return rooms.splice(index, 1)[0]
+    }
+}
+
 module.exports = {
     addUser,
     removeUser,
     getUser,
-    getUsersInRoom
+    getUsersInRoom,
+    getRoomList,
+    removeRoom
 }
