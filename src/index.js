@@ -4,7 +4,7 @@ const express = require('express')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
 const { generateMessage, generateLocationMessage } = require('./utils/messages')
-const { addUser, removeUser, getUser, getUsersInRoom, getRoomList, removeRoom } = require('./utils/users')
+const { addUser, removeUser, getUser, getUsersInRoom, getRoomList, addRoom } = require('./utils/users')
 
 const app = express()
 const server = http.createServer(app)
@@ -16,7 +16,8 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 app.use(express.static(publicDirectoryPath))
 
 io.on('connection', (socket) => {
-    //console.log('New Web Socket connection')
+    console.log('New Web Socket connection')
+    //socket.emit('updateRoomList', getRoomList())
     io.emit('updateRoomList', getRoomList())
 
     socket.on('join', ({username, room}, callback) => {
@@ -27,6 +28,7 @@ io.on('connection', (socket) => {
         }
 
         socket.join(user.room)
+        addRoom(user.room)
 
         socket.emit('message', generateMessage('Admin', 'Welcome to the Chat App'))
         socket.broadcast.to(user.room).emit('message', generateMessage('Admin', `${user.username} has joined!`))

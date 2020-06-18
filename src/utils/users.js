@@ -29,14 +29,6 @@ const addUser = ({id, username, room}) => {
     const user = { id, username, room}
     users.push(user)
 
-    const existingRoom = rooms.find((_room) => {
-        return _room === room
-    })
-
-    if (!existingRoom) {
-        rooms.push(room)
-    }
-
     return {user}
 }
 
@@ -50,12 +42,21 @@ const removeUser = (id) => {
 
 const getUser = (id) => {
     return users.find((user) => user.id === id)
-
 }
 
 const getUsersInRoom = (room) => {
     room = room.trim().toLowerCase()
     return users.filter((user) => user.room === room)
+}
+
+const addRoom = (room) => {
+    const existingRoom = rooms.find((_room) => {
+        return _room === room
+    })
+
+    if (!existingRoom) {
+        rooms.push(room)
+    }
 }
 
 const getRoomList = () => {
@@ -75,6 +76,7 @@ module.exports = {
     removeUser,
     getUser,
     getUsersInRoom,
+    addRoom,
     getRoomList,
     removeRoom
 }
